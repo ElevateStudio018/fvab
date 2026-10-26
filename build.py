@@ -393,7 +393,7 @@ home = f'''
   </div>
 </div></section>
 
-<section><div class="wrap">
+<section class="winrow"><div class="wrap">
   <div class="section-head reveal"><div><h2>Från våra kunder</h2></div><a class="btn btn-ghost" href="galleri.html">Hela galleriet {ARROW}</a></div>
   <div class="photos lg reveal" data-lb-group>{photos([I + "galleri/skjutdorrar/skjutdorrar-115.webp", I + "galleri/fonster/fonster-114.webp", I + "galleri/dorrar/dorrar-1011.webp", I + "galleri/fasad/fasad-214.webp", I + "galleri/skjutdorrar/skjutdorrar-1811.webp", I + "galleri/fonster/fonster-4311.webp", I + "galleri/dorrar/dorrar-815.webp", I + "galleri/skjutdorrar/skjutdorrar-1311.webp"], "Referens")}</div>
 </div></section>
