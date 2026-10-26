@@ -96,7 +96,6 @@ def doclinks(rows):
 
 def page_hero(eyebrow, title, lead):
     return f'''<section class="page-hero"><div class="wrap">
-  <span class="eyebrow">{eyebrow}</span>
   <h1>{title}</h1>
   <p class="lead">{lead}</p>
 </div></section>'''
@@ -105,7 +104,6 @@ def page_hero(eyebrow, title, lead):
 CTA = f'''<section class="cta reveal">
   <img src="{I}cta/skjutdorr-4k.webp" alt="" loading="lazy">
   <div class="wrap">
-    <span class="eyebrow" style="color:#cfe1ea">Fönster &amp; dörrar efter mått</span>
     <h2>Berätta vad du planerar – vi tar fram en offert.</h2>
     <p>Allt tillverkas på beställning i vår fabrik i Lödöse. Välkommen att besöka utställningen i Lilla Edet, eller skicka en förfrågan direkt.</p>
     <div class="btns"><a class="btn btn-light" href="kontakt.html#offert">Begär offert {ARROW}</a><a class="btn btn-ghost" href="tel:{TEL1}">Ring {TEL1_H}</a></div>
@@ -147,7 +145,7 @@ def pcard(p, cls="reveal"):
 def refs(key, title="Referenser", n=12):
     items = GAL[key][SKIP.get(key, 0):]
     return f'''<section style="padding-top:0"><div class="wrap">
-  <div class="section-head reveal"><div><span class="eyebrow">{title}</span><h2>Monterat hos våra kunder</h2></div>
+  <div class="section-head reveal"><div><h2>Monterat hos våra kunder</h2></div>
   <a class="btn btn-ghost" href="galleri.html?kategori={key}">Se alla {len(GAL[key])} bilder {ARROW}</a></div>
   <div class="photos lg reveal" data-lb-group>{photos(items, GAL_LABEL[key], limit=n)}</div>
 </div></section>'''
@@ -159,7 +157,7 @@ def product_page(slug, lead, intro_html, stats, specs, extra, eyebrow="Produkter
     spec_html = "".join(f"<dt>{k}</dt><dd>{v}</dd>" for k, v in specs)
     doc_html = f'<h4 style="margin-top:24px;font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:500">Dokument</h4>{doclinks(docs)}' if docs else ""
     body = f'''<section class="page-hero"><div class="wrap split">
-  <div><span class="eyebrow">{eyebrow}</span><h1>{p["title"]}</h1><p class="lead">{lead}</p>
+  <div><h1>{p["title"]}</h1><p class="lead">{lead}</p>
   <div class="btns" style="display:flex;flex-wrap:wrap;gap:10px;margin-top:2rem"><a class="btn btn-primary" href="kontakt.html#offert">Begär offert {ARROW}</a>{f'<a class="btn btn-ghost" href="galleri.html?kategori={p["gal"]}">Se referenser</a>' if p["gal"] else ""}</div></div>
   <div class="rounded reveal" style="aspect-ratio:4/3;max-width:640px;justify-self:end;width:100%"><img src="{p["cover"]}" alt="{esc(p["title"])}" fetchpriority="high"></div>
 </div></section>
@@ -188,7 +186,7 @@ product_page("fonster",
     [("Material", "PVC-profil, tysk, blyfri"), ("Glas", "2- eller 3-glas med argon"), ("Öppning", "Dreh-kipp (inåt + vädring), kipp, fast"),
      ("Former", "Rektangulära, runda, halvrunda, 45°"), ("Underhåll", "Ingen målning – någonsin")],
     f'''<section style="padding-top:0"><div class="wrap">
-  <div class="section-head reveal"><div><span class="eyebrow">Utföranden</span><h2>Ritningar och funktioner</h2></div><p class="muted" style="max-width:40ch">Alla fönster tillverkas efter mått. Kombinera fasta och öppningsbara lufter fritt.</p></div>
+  <div class="section-head reveal"><div><h2>Ritningar och funktioner</h2></div><p class="muted" style="max-width:40ch">Alla fönster tillverkas efter mått. Kombinera fasta och öppningsbara lufter fritt.</p></div>
   <div class="reveal">{drawings([
       ("1", "Fast", "Fast fönster, smalt"), ("2", "Fast", "Fast fönster, brett"),
       ("3", "Fast med mittpost", "Vertikal mittpost"), ("6", "Fast med mittpost", "Vertikal och horisontell mittpost"),
@@ -216,7 +214,7 @@ product_page("balkongdorrar",
     [("Låsning", "Spanjolett, låser runt om"), ("Tröskel", "Standard 67 mm eller låg aluminium"), ("Gångjärn", "3 st Dr. Hahn (utåtgående)"),
      ("Tillval", "Handtag och lås, glas, bröstning, spröjs"), ("Färg", "Profiler och beslag i valfri färg")],
     f'''<section style="padding-top:0"><div class="wrap">
-  <div class="section-head reveal"><div><span class="eyebrow">Utföranden</span><h2>Dörrtyper</h2></div><p class="muted" style="max-width:40ch">Samtliga kan kompletteras med handtag och lås, glas, bröstning och spröjs.</p></div>
+  <div class="section-head reveal"><div><h2>Dörrtyper</h2></div><p class="muted" style="max-width:40ch">Samtliga kan kompletteras med handtag och lås, glas, bröstning och spröjs.</p></div>
   <div class="reveal">{drawings([
       ("1", "Diagram A", "Sidohängd inåtgående dörr med vädring (dreh-kipp)"),
       ("3", "Diagram B", "Sidohängd utåtgående dörr med handtagsstyrd broms och 3 gångjärn – även med låg aluminiumtröskel"),
@@ -243,7 +241,7 @@ product_page("skjutdorrar",
     [("Modeller", "S (standard) och Z (självindragande)"), ("System", "3130 S · 4150 S · 160-Z · 200-Z"), ("Glas", "2- eller 3-glas med argon; säkerhetsglas"),
      ("Låsning", "Spanjolett, V-1/V-2 som tillval"), ("Montering", "Frakt och montering med ROT-avdrag")],
     f'''<section style="padding-top:0"><div class="wrap">
-  <div class="section-head reveal"><div><span class="eyebrow">Utföranden</span><h2>Konfigurationer</h2></div><p class="muted" style="max-width:40ch">Alla ritningar är sedda från insidan, när du står framför dörren.</p></div>
+  <div class="section-head reveal"><div><h2>Konfigurationer</h2></div><p class="muted" style="max-width:40ch">Alla ritningar är sedda från insidan, när du står framför dörren.</p></div>
   <div class="reveal">{drawings([
       ("ab", "Diagram A–B", "Tvådelad skjutdörr upp till 3,4 m – från höger till vänster eller vänster till höger"),
       ("cdef", "Diagram C–F", "Tredelad skjutdörr upp till 5 m – med en skjutbar dörr från center eller från sidan"),
@@ -265,7 +263,7 @@ product_page("kombinerade-dorrar",
     [("1,2 <small>W/m²K</small>", "Hela konstruktionen, 2-glas"), ("1,0 <small>W/m²K</small>", "Hela konstruktionen, 3-glas")],
     [("Låsning", "Spanjoletter"), ("Glas", "Dubbel- eller trippelglas"), ("Färg", "Profiler och beslag i valfri färg")],
     f'''<section style="padding-top:0"><div class="wrap">
-  <div class="section-head reveal"><div><span class="eyebrow">Utföranden</span><h2>Kombinationer</h2></div></div>
+  <div class="section-head reveal"><div><h2>Kombinationer</h2></div></div>
   <div class="reveal">{drawings([
       ("1", "", "Kombinerad skjutdörr och inåtgående dörr med impost"),
       ("2", "", "Kombinerad skjutdörr och utåtgående dörr med impost"),
@@ -284,7 +282,7 @@ product_page("takfonster",
     [], [("Tillverkare", "ROTO, Tyskland"), ("Material", "Trä eller PVC"), ("Mått", "Samma dimensioner som Velux"), ("Tillbehör", "Persienner och rullgardiner")],
     f'''<section style="padding-top:0"><div class="wrap"><div class="split reveal">
   <div class="drawing" style="padding:32px"><div class="pic" style="height:auto"><img src="{I}misc/takfonster-ritning.webp" alt="Ritning takfönster" style="max-height:none" loading="lazy"></div></div>
-  <div><span class="eyebrow">Byte av takfönster</span><h2>Passar i befintliga öppningar</h2><p class="lead" style="margin-top:1rem">Eftersom måtten är desamma som hos Velux kan ROTO-fönster ersätta befintliga takfönster utan att öppningen behöver ändras.</p></div>
+  <div><h2>Passar i befintliga öppningar</h2><p class="lead" style="margin-top:1rem">Eftersom måtten är desamma som hos Velux kan ROTO-fönster ersätta befintliga takfönster utan att öppningen behöver ändras.</p></div>
 </div></div></section>''')
 
 # Fasader
@@ -317,20 +315,20 @@ def swatches(folder, files, label):
 
 body = f'''{page_hero("Produkter", "Tillval", "Gör fönstren och dörrarna till dina egna – välj glas, handtag och lås, spröjs och övriga tillbehör.")}
 <section style="padding-top:0"><div class="wrap">
-  <div class="section-head reveal"><div><span class="eyebrow">01 · Glas</span><h2>Glas</h2></div><p class="muted" style="max-width:44ch">Vi tillhandahåller alla glasalternativ som finns på marknaden: energiglas med argon och varma kanter, solskydd, ljudisolerande, smutsavvisande, matt och mönstrat, brandsäkert samt härdat och laminerat säkerhetsglas.</p></div>
+  <div class="section-head reveal"><div><h2>Glas</h2></div><p class="muted" style="max-width:44ch">Vi tillhandahåller alla glasalternativ som finns på marknaden: energiglas med argon och varma kanter, solskydd, ljudisolerande, smutsavvisande, matt och mönstrat, brandsäkert samt härdat och laminerat säkerhetsglas.</p></div>
   <div class="photos reveal" data-lb-group>{swatches("glas", [str(i) for i in range(1, 21)] + ["laminerat-glas"], "Glas")}</div>
 </div></section>
 <section style="padding-top:0"><div class="wrap">
-  <div class="section-head reveal"><div><span class="eyebrow">02 · Handtag och lås</span><h2>Handtag och lås</h2></div><p class="muted" style="max-width:44ch">Standardhandtag, låsbara handtag, barnsäkerhet, grephandtag och handtag för ASSA-lås. Se prislistan för lås och handtag.</p></div>
+  <div class="section-head reveal"><div><h2>Handtag och lås</h2></div><p class="muted" style="max-width:44ch">Standardhandtag, låsbara handtag, barnsäkerhet, grephandtag och handtag för ASSA-lås. Se prislistan för lås och handtag.</p></div>
   <div class="photos reveal" data-lb-group>{swatches("handtag", [str(i) for i in range(1, 13)], "Handtag")}</div>
   <p style="margin-top:20px"><a class="link" href="dokument/info.pdf" target="_blank" rel="noopener">Lås och handtag – tillbehör &amp; priser (PDF)</a></p>
 </div></section>
 <section style="padding-top:0"><div class="wrap">
-  <div class="section-head reveal"><div><span class="eyebrow">03 · Spröjs</span><h2>Spröjs</h2></div><p class="muted" style="max-width:44ch">Spröjs ger fönstren en klassisk karaktär – välj mönster som passar husets stil.</p></div>
+  <div class="section-head reveal"><div><h2>Spröjs</h2></div><p class="muted" style="max-width:44ch">Spröjs ger fönstren en klassisk karaktär – välj mönster som passar husets stil.</p></div>
   <div class="photos reveal" data-lb-group>{swatches("sprojs", ["1","2","3","4","5","6","7","8","9","10","11","12","15","712","715","003","000"], "Spröjs")}</div>
 </div></section>
 <section style="padding-top:0"><div class="wrap">
-  <div class="section-head reveal"><div><span class="eyebrow">04 · Övrigt</span><h2>Övriga tillbehör</h2></div></div>
+  <div class="section-head reveal"><div><h2>Övriga tillbehör</h2></div></div>
   <div class="tiles reveal">
     <a class="tile" href="persienner.html"><div class="img"><img src="{I}tillval/persienn.webp" alt="" loading="lazy"></div><div class="body"><h3>Persienner</h3><p>Se persienner och rullgardiner →</p></div></a>
     <a class="tile" href="persienner.html"><div class="img"><img src="{I}tillval/myggnat.webp" alt="" loading="lazy"></div><div class="body"><h3>Myggnät</h3><p>För fönster och dörrar →</p></div></a>
@@ -355,13 +353,11 @@ home = f'''
     <a class="hero-tag" href="kontakt.html">Utställning i Lilla Edet →</a>
     <div class="hero-content">
       <div>
-        <span class="eyebrow" style="color:#cfe1ea">Svensktillverkade PVC-fönster &amp; dörrar</span>
         <h1>Fönster som släpper in ljuset – och håller ute vädret</h1>
       </div>
       <div>
         <p>PVC är ett perfekt material för konstruktion – därför väljer allt fler PVC-fönster och dörrar i sina fastigheter. Energisnåla, underhållsfria och kostnadseffektiva.</p>
         <div class="btns"><a class="btn btn-light" href="kontakt.html#offert">Begär offert {ARROW}</a><a class="btn btn-ghost" href="produkter.html">Se produkter</a></div>
-        <div class="glass-chips"><span>U 0,7 W/m²K</span><span>5 kammare</span><span>Upp till 8 m</span></div>
       </div>
     </div>
   </div>
@@ -369,7 +365,7 @@ home = f'''
 
 <section><div class="wrap">
   <div class="split top">
-    <div class="reveal"><span class="eyebrow">Fönsterfabriken i Väst</span><h2>Hög kvalitet och säkerhet – med ett framtidstänkande.</h2></div>
+    <div class="reveal"><h2>Hög kvalitet och säkerhet – med ett framtidstänkande.</h2></div>
     <div class="reveal">
       <p class="lead" style="max-width:none">Våra fönster är energisnåla, underhållsfria och kostnadseffektiva. Vi tillhandahåller alla de glasalternativ som finns på marknaden.</p>
       <p class="muted" style="margin-top:1rem">Vi tillverkar fönster, balkongdörrar, skjutdörrar och kombinerade partier efter mått i vår fabrik i Lödöse, med lager och utställning i Lilla Edet. Vi erbjuder frakt och montering till rimlig kostnad – med ROT-avdrag.</p>
@@ -384,13 +380,13 @@ home = f'''
 </div></section>
 
 <section style="padding-top:0"><div class="wrap">
-  <div class="section-head reveal"><div><span class="eyebrow">Produkter</span><h2>Vårt sortiment</h2></div><a class="btn btn-ghost" href="produkter.html">Alla produkter {ARROW}</a></div>
+  <div class="section-head reveal"><div><h2>Vårt sortiment</h2></div><a class="btn btn-ghost" href="produkter.html">Alla produkter {ARROW}</a></div>
   <div class="grid">{"".join(pcard(p) for p in PRODUCTS)}</div>
 </div></section>
 
 <section class="dark"><div class="wrap">
   <div class="split top">
-    <div class="reveal"><span class="eyebrow">Fördelar med PVC-fönster</span><h2>Ett material byggt för det svenska klimatet.</h2>
+    <div class="reveal"><h2>Ett material byggt för det svenska klimatet.</h2>
       <p class="lead" style="margin-top:1.2rem">Profiler från VEKA, beslag från Roto och Winkhaus, handtag från Hoppe och glas från Press Glas.</p>
       <a class="btn btn-light" style="margin-top:2rem" href="info.html">Läs mer om PVC {ARROW}</a></div>
     <ul class="ticks reveal">{"".join(f"<li>{t}</li>" for t in ["Energibesparande", "Underhållsfria", "Lång livslängd", "Väderbeständiga", "Färgbeständiga", "Miljövänliga", "Ljudisolerande", "Måttbeställning", "Elegant design", "Hög säkerhet"])}</ul>
@@ -398,14 +394,14 @@ home = f'''
 </div></section>
 
 <section><div class="wrap">
-  <div class="section-head reveal"><div><span class="eyebrow">Galleri</span><h2>Från våra kunder</h2></div><a class="btn btn-ghost" href="galleri.html">Hela galleriet {ARROW}</a></div>
+  <div class="section-head reveal"><div><h2>Från våra kunder</h2></div><a class="btn btn-ghost" href="galleri.html">Hela galleriet {ARROW}</a></div>
   <div class="photos lg reveal" data-lb-group>{photos([I + "galleri/skjutdorrar/skjutdorrar-115.webp", I + "galleri/fonster/fonster-114.webp", I + "galleri/dorrar/dorrar-1011.webp", I + "galleri/fasad/fasad-214.webp", I + "galleri/skjutdorrar/skjutdorrar-1811.webp", I + "galleri/fonster/fonster-4311.webp", I + "galleri/dorrar/dorrar-815.webp", I + "galleri/skjutdorrar/skjutdorrar-1311.webp"], "Referens")}</div>
 </div></section>
 
 <section style="padding-top:0"><div class="wrap">
   <div class="split">
     <div class="rounded reveal" style="aspect-ratio:4/3"><img src="{I}hus/lena.webp" alt="Tillbyggnad i Kållekär" loading="lazy"></div>
-    <div class="reveal"><span class="eyebrow">Isolla Bygg</span><h2>Hustillverkning med SIP-element</h2>
+    <div class="reveal"><h2>Hustillverkning med SIP-element</h2>
       <p class="lead" style="margin-top:1.2rem">Utöver fönster och dörrar bygger vi tillbyggnader, attefallshus och hela hus med egentillverkade SIP-moduler och underhållsfria fasader.</p>
       <a class="btn btn-primary" style="margin-top:2rem" href="hustillverkning.html">Se referenser {ARROW}</a></div>
   </div>
@@ -460,7 +456,7 @@ body = f'''{page_hero("Om PVC", "Fördelar med PVC-fönster", "PVC är ett perfe
     <li>Handtagsstyrda bromsar för dörrar<span>Utåtgående dörrar</span></li></ul></div>
 </div></div></section>
 <section style="padding-top:0"><div class="wrap">
-  <div class="section-head reveal"><div><span class="eyebrow">Leverantörer</span><h2>Tysk och europeisk kvalitet</h2></div></div>
+  <div class="section-head reveal"><div><h2>Tysk och europeisk kvalitet</h2></div></div>
   <div class="logos reveal">{"".join(f'<div><img src="{I}logos/{f}.webp" alt="{esc(t)}" loading="lazy"></div>' for f, t in logos)}</div>
   <div class="logos" style="margin-top:8px">{"".join(f'<span>{esc(t)}</span>' for f, t in logos)}</div>
 </div></section>
@@ -515,7 +511,6 @@ body = f'''{page_hero("Kontakt", "Välkommen till Fönsterfabriken i Väst", "Ri
 <section style="padding-top:0"><div class="wrap">
   <div class="contact-grid" id="offert">
     <div class="contact-info reveal">
-      <span class="eyebrow" style="margin:0">Kontaktuppgifter</span>
       <dl>
         <div><dt>Telefon</dt><dd><a href="tel:{TEL1}">{TEL1_H}</a><br><a href="tel:{TEL2}">{TEL2_H}</a></dd></div>
         <div><dt>E-post</dt><dd><a href="mailto:{MAIL}">{MAIL}</a><br><a href="mailto:alina@fvab.se">alina@fvab.se</a></dd></div>
