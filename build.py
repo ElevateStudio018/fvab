@@ -10,6 +10,29 @@ ARROW_UR = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-wi
 DL = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v12M6 10l6 6 6-6M5 20h14"/></svg>'
 MARK = '<svg class="mark" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M5 29V14a11 11 0 0 1 22 0v15z"/><path d="M16 3.5V29M5 17h22"/><circle cx="19.5" cy="22" r=".9" fill="currentColor" stroke="none"/></svg>'
 I = "assets/img/"
+ICONS = {
+    "box": '<path d="M3 7.5L12 3l9 4.5v9L12 21l-9-4.5z"/><path d="M3 7.5l9 4.5 9-4.5M12 12v9"/>',
+    "truck": '<path d="M2 6h11v10H2zM13 9h4.5L21 12.5V16h-8"/><circle cx="6" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/>',
+    "layers": '<path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/>',
+    "house": '<path d="M3 11l9-7 9 7v9H3z"/><path d="M9 20v-6h6v6"/>',
+    "pin": '<path d="M12 21s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/>',
+    "leaf": '<path d="M5 19c0-9 6-14 15-14 0 9-5 15-14 15"/><path d="M5 19l7-7"/>',
+    "pane": '<rect x="4" y="3" width="16" height="18" rx="2"/><path d="M12 3v18M4 12h16"/>',
+    "hinge": '<rect x="7" y="3" width="10" height="18" rx="2"/><path d="M7 8h-3M7 16h-3M14 11v2"/>',
+    "badge": '<circle cx="12" cy="9" r="5.5"/><path d="M8.5 13.5L7 21l5-2.5 5 2.5-1.5-7.5"/>',
+    "wrench": '<path d="M14.5 6.5a4 4 0 0 0 5 5L12 19a2.1 2.1 0 0 1-3-3l7.5-7.5a4 4 0 0 0-2-2z"/>',
+    "sliders": '<path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/>',
+    "file": '<path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 13h6M9 17h6"/>',
+    "phone": '<path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/>',
+    "mail": '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/>',
+    "user": '<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>',
+    "factory": '<path d="M3 21V10l6 4V10l6 4V5h6v16z"/><path d="M7 17h2M12 17h2"/>',
+}
+
+
+def icon(name, cls="sico"):
+    return f'<span class="{cls}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">{ICONS[name]}</svg></span>'
+
 TEL1, TEL1_H = "+46707144001", "0707-14 40 01"
 TEL2, TEL2_H = "+46520650301", "0520-65 03 01"
 MAIL = "info@fvab.se"
@@ -44,7 +67,7 @@ def page(path, title, desc, body, active="", og=HERO):
 <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body>
+<body id="top">
 <header class="site-header">
   <nav class="nav" aria-label="Huvudmeny">
     {logo}
@@ -67,7 +90,7 @@ def page(path, title, desc, body, active="", og=HERO):
       <div><h4>Sidor</h4><ul>{"".join(f'<li><a href="{h}">{t}</a></li>' for h, t in NAV[2:])}</ul></div>
       <div><h4>Kontakt</h4><ul><li><a href="tel:{TEL1}">{TEL1_H}</a></li><li><a href="tel:{TEL2}">{TEL2_H}</a></li><li><a href="mailto:{MAIL}">{MAIL}</a></li><li style="margin-top:8px">Göteborgsvägen 90<br>463 33 Lilla Edet</li></ul></div>
     </div>
-    <div class="footer-bottom"><span>© Fönsterfabriken i Väst AB</span><span>PVC-fönster &amp; dörrar · Lilla Edet · Göteborg</span></div>
+    <div class="footer-bottom"><span>© Fönsterfabriken i Väst AB</span><span>PVC-fönster &amp; dörrar · Lilla Edet · Göteborg</span><a class="totop" href="#top">Till toppen ↑</a></div>
   </div>
 </footer>
 <div class="lb" role="dialog" aria-modal="true" aria-label="Bildvisning"><img src="" alt=""><button class="close" aria-label="Stäng">×</button><button class="nav-btn prev" aria-label="Föregående">‹</button><button class="nav-btn next" aria-label="Nästa">›</button><div class="cap"></div></div>
@@ -90,25 +113,42 @@ def drawings(rows, folder, cls=""):
     return f'<div class="drawings {cls}">{out}</div>'
 
 
+def size(f):
+    b = (ROOT / "dokument" / f"{f}.pdf").stat().st_size
+    return f"{b / 1e6:.1f} MB".replace(".", ",") if b >= 1e6 else f"{round(b / 1e3)} kB"
+
+
 def doclinks(rows):
-    return '<ul class="doclist">' + "".join(f'<li><a href="dokument/{f}.pdf" target="_blank" rel="noopener">{esc(t)}<span>PDF {DL}</span></a></li>' for t, f in rows) + "</ul>"
+    return '<ul class="doclist">' + "".join(f'<li><a href="dokument/{f}.pdf" target="_blank" rel="noopener">{icon("file", "fico")}<b>{esc(t)}</b><span>PDF · {size(f)} {DL}</span></a></li>' for t, f in rows) + "</ul>"
+
+
+def crumbs(*parts):
+    items = ['<a href="./index.html">Hem</a>'] + [f'<a href="{h}">{t}</a>' if h else f"<span>{t}</span>" for t, h in parts]
+    return '<nav class="crumbs" aria-label="Brödsmulor">' + '<i>/</i>'.join(items) + "</nav>"
 
 
 def page_hero(eyebrow, title, lead):
+    trail = [("Produkter", "produkter.html"), (title, None)] if title == "Tillval" else [({"Isolla Bygg": "Hustillverkning"}.get(eyebrow, eyebrow), None)]
     return f'''<section class="page-hero"><div class="wrap">
+  {crumbs(*trail)}
   <h1>{title}</h1>
   <p class="lead">{lead}</p>
 </div></section>'''
 
 
-CTA = f'''<section class="cta reveal">
-  <img src="{I}cta/skjutdorr-4k.webp" alt="" loading="lazy">
-  <div class="wrap">
+CTA = f'''<section class="cta2"><div class="wrap"><div class="cta2-card reveal">
+  <div class="cta2-text">
     <h2>Berätta vad du planerar – vi tar fram en offert.</h2>
     <p>Allt tillverkas på beställning i vår fabrik i Lödöse. Välkommen att besöka utställningen i Lilla Edet, eller skicka en förfrågan direkt.</p>
-    <div class="btns"><a class="btn btn-light" href="kontakt.html#offert">Begär offert {ARROW}</a><a class="btn btn-ghost" href="tel:{TEL1}">Ring {TEL1_H}</a></div>
+    <div class="btns"><a class="btn btn-primary" href="kontakt.html#offert">Begär offert {ARROW}</a></div>
+    <ul class="cta2-contact">
+      <li>{icon("phone", "cico")}<a href="tel:{TEL1}">{TEL1_H}</a></li>
+      <li>{icon("mail", "cico")}<a href="mailto:{MAIL}">{MAIL}</a></li>
+      <li>{icon("pin", "cico")}<span>Göteborgsvägen 90, Lilla Edet</span></li>
+    </ul>
   </div>
-</section>'''
+  <div class="cta2-img"><img src="{I}cta/skjutdorr-4k.webp" alt="Skjutdörr med havsutsikt" loading="lazy"></div>
+</div></div></section>'''
 
 # ---------------------------------------------------------------- products
 PRODUCTS = [
@@ -138,7 +178,7 @@ GAL_LABEL = {"fonster": "Fönster", "skjutdorrar": "Skjutdörrar", "dorrar": "Ba
 def pcard(p, cls="reveal"):
     return f'''<a class="pcard {cls}" href="{p["slug"]}.html">
   <div class="img"><img src="{p["cover"]}" alt="{esc(p["title"])}" loading="lazy"></div>
-  <div class="body"><h3>{p["title"]}<span class="arrow">{ARROW_UR}</span></h3><p>{p["short"]}</p></div>
+  <div class="body"><h3>{p["title"]}</h3><p>{p["short"]}</p><span class="more">Läs mer <i></i></span></div>
 </a>'''
 
 
@@ -146,7 +186,7 @@ def refs(key, title="Referenser", n=12):
     items = GAL[key][SKIP.get(key, 0):]
     return f'''<section style="padding-top:0"><div class="wrap">
   <div class="section-head reveal"><div><h2>Monterat hos våra kunder</h2></div>
-  <a class="btn btn-ghost" href="galleri.html?kategori={key}">Se alla {len(GAL[key])} bilder {ARROW}</a></div>
+  <a class="textlink" href="galleri.html?kategori={key}">Se alla {len(GAL[key])} bilder <i></i></a></div>
   <div class="photos lg reveal" data-lb-group>{photos(items, GAL_LABEL[key], limit=n)}</div>
 </div></section>'''
 
@@ -154,10 +194,10 @@ def refs(key, title="Referenser", n=12):
 def product_page(slug, lead, intro_html, stats, specs, extra, eyebrow="Produkter", docs=None):
     p = PBY[slug]
     stat_html = "".join(f'<div class="stat"><b>{v}</b><span>{k}</span></div>' for v, k in stats)
-    spec_html = "".join(f"<dt>{k}</dt><dd>{v}</dd>" for k, v in specs)
+    spec_html = "".join(f"<div><dt>{k}</dt><dd>{v}</dd></div>" for k, v in specs)
     doc_html = f'<h4 style="margin-top:24px;font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:500">Dokument</h4>{doclinks(docs)}' if docs else ""
     body = f'''<section class="page-hero"><div class="wrap split">
-  <div><h1>{p["title"]}</h1><p class="lead">{lead}</p>
+  <div>{crumbs(("Produkter", "produkter.html"), (p["title"], None))}<h1>{p["title"]}</h1><p class="lead">{lead}</p>
   <div class="btns" style="display:flex;flex-wrap:wrap;gap:10px;margin-top:2rem"><a class="btn btn-primary" href="kontakt.html#offert">Begär offert {ARROW}</a>{f'<a class="btn btn-ghost" href="galleri.html?kategori={p["gal"]}">Se referenser</a>' if p["gal"] else ""}</div></div>
   <div class="rounded reveal" style="aspect-ratio:4/3;max-width:640px;justify-self:end;width:100%"><img src="{p["cover"]}" alt="{esc(p["title"])}" fetchpriority="high"></div>
 </div></section>
@@ -380,7 +420,7 @@ home = f'''
 </div></section>
 
 <section style="padding-top:0"><div class="wrap">
-  <div class="section-head reveal"><div><h2>Vårt sortiment</h2></div><a class="btn btn-ghost" href="produkter.html">Alla produkter {ARROW}</a></div>
+  <div class="section-head reveal"><div><h2>Vårt sortiment</h2></div><a class="textlink" href="produkter.html">Alla produkter <i></i></a></div>
   <div class="grid">{"".join(pcard(p) for p in PRODUCTS)}</div>
 </div></section>
 
@@ -394,7 +434,7 @@ home = f'''
 </div></section>
 
 <section class="winrow"><div class="wrap">
-  <div class="section-head reveal"><div><h2>Från våra kunder</h2></div><a class="btn btn-ghost" href="galleri.html">Hela galleriet {ARROW}</a></div>
+  <div class="section-head reveal"><div><h2>Från våra kunder</h2></div><a class="textlink" href="galleri.html">Hela galleriet <i></i></a></div>
   <div class="photos lg reveal" data-lb-group>{photos([I + "galleri/skjutdorrar/skjutdorrar-115.webp", I + "galleri/fonster/fonster-114.webp", I + "galleri/dorrar/dorrar-1011.webp", I + "galleri/fasad/fasad-214.webp", I + "galleri/skjutdorrar/skjutdorrar-1811.webp", I + "galleri/fonster/fonster-4311.webp", I + "galleri/dorrar/dorrar-815.webp", I + "galleri/skjutdorrar/skjutdorrar-1311.webp"], "Referens")}</div>
 </div></section>
 
@@ -433,9 +473,9 @@ body = f'''{page_hero("Isolla Bygg", "Hustillverkning", "Tillbyggnader, attefall
   <div class="refs" data-lb-group>{cells}</div>
 </div></section>
 <section style="padding-top:0"><div class="wrap"><div class="services">
-  <div class="service reveal"><h3><span>01</span>SIP-element</h3><p>Vi producerar SIP-moduler (Structural Insulated Panels) i egen regi – välisolerade, lätta och snabba att resa på plats.</p></div>
-  <div class="service reveal"><h3><span>02</span>Underhållsfri fasad</h3><p>Husen kläs med underhållsfri fasadpanel som aldrig behöver målas. <a class="link" href="fasader.html">Läs mer om fasader</a></p></div>
-  <div class="service reveal span"><h3><span>03</span>Referensprojekt</h3><ul class="service-list">
+  <div class="service reveal"><h3>{icon("layers")}SIP-element</h3><p>Vi producerar SIP-moduler (Structural Insulated Panels) i egen regi – välisolerade, lätta och snabba att resa på plats.</p></div>
+  <div class="service reveal"><h3>{icon("house")}Underhållsfri fasad</h3><p>Husen kläs med underhållsfri fasadpanel som aldrig behöver målas. <a class="link" href="fasader.html">Läs mer om fasader</a></p></div>
+  <div class="service reveal span"><h3>{icon("pin")}Referensprojekt</h3><ul class="service-list">
     <li>Tillbyggnad i Kållekär<span>Tillbyggnad</span></li><li>Attefallshus Mölndal<span>Attefallshus</span></li>
     <li>Attefallshus Norra Granliden<span>Attefallshus</span></li><li>Norra Granliden<span>Tillbyggnad</span></li>
     <li>Suterränghus i Hjärtum<span>Nybyggnad</span></li><li>Produktion av SIP-moduler<span>Fabrik, Lödöse</span></li></ul></div>
@@ -448,9 +488,9 @@ logos = [("veka", "VEKA – profiler"), ("roto", "Roto – beslag"), ("winkhaus"
          ("pressglas", "Press Glas – glas"), ("isotra", "Isotra – persienner")]
 body = f'''{page_hero("Om PVC", "Fördelar med PVC-fönster", "PVC är ett perfekt material för konstruktion. Här är varför – och vilka leverantörer vi arbetar med.")}
 <section style="padding-top:0"><div class="wrap"><div class="services">
-  <div class="service reveal"><h3><span>01</span>Fördelar</h3><ul class="ticks" style="grid-template-columns:1fr 1fr;margin-top:12px">{"".join(f"<li>{t}</li>" for t in ["Energibesparande", "Underhållsfria", "Lång livslängd", "Väderbeständiga", "Färgbeständiga", "Miljövänliga", "Ljudisolerande", "Måttbeställning", "Elegant design"])}</ul></div>
-  <div class="service reveal"><h3><span>02</span>Utbud av glas</h3><ul class="ticks" style="grid-template-columns:1fr 1fr;margin-top:12px">{"".join(f"<li>{t}</li>" for t in ["2-glaskassett U 1,1", "3-glaskassett U 0,8", "Med argon", "Med varma kanter", "Med solskydd", "Ljudisolerande", "Smutsavvisande", "Matt/mönstrat glas", "Brandsäkert", "Säkerhetsglas"])}</ul></div>
-  <div class="service reveal span"><h3><span>03</span>Beslag</h3><ul class="service-list">
+  <div class="service reveal"><h3>{icon("leaf")}Fördelar</h3><ul class="ticks" style="grid-template-columns:1fr 1fr;margin-top:12px">{"".join(f"<li>{t}</li>" for t in ["Energibesparande", "Underhållsfria", "Lång livslängd", "Väderbeständiga", "Färgbeständiga", "Miljövänliga", "Ljudisolerande", "Måttbeställning", "Elegant design"])}</ul></div>
+  <div class="service reveal"><h3>{icon("pane")}Utbud av glas</h3><ul class="ticks" style="grid-template-columns:1fr 1fr;margin-top:12px">{"".join(f"<li>{t}</li>" for t in ["2-glaskassett U 1,1", "3-glaskassett U 0,8", "Med argon", "Med varma kanter", "Med solskydd", "Ljudisolerande", "Smutsavvisande", "Matt/mönstrat glas", "Brandsäkert", "Säkerhetsglas"])}</ul></div>
+  <div class="service reveal span"><h3>{icon("hinge")}Beslag</h3><ul class="service-list">
     <li>Inåtgående dreh-kipp<span>Sidohängda med vädring</span></li>
     <li>Utåtgående med gömda gångjärn<span>Dörrar och fönster</span></li>
     <li>Handtagsstyrda bromsar för dörrar<span>Utåtgående dörrar</span></li></ul></div>
@@ -465,17 +505,17 @@ page("info.html", "Fördelar med PVC-fönster – Fönsterfabriken i Väst", "F�
 
 # ---------------------------------------------------------------- dokument
 groups = [
-    ("01", "Certifikat", [("Certifikat 2-glas, U-värde", "2glas"), ("Certifikat 3-glas, U-värde", "3glas"), ("Certifikat 2-glas, Rw", "glas-2gl-rw"),
+    ("badge", "Certifikat", [("Certifikat 2-glas, U-värde", "2glas"), ("Certifikat 3-glas, U-värde", "3glas"), ("Certifikat 2-glas, Rw", "glas-2gl-rw"),
                          ("Certifikat 3-glas, Rw", "glas-3gl-rw"), ("Certifikat profil, säkerhet", "certificat-security-profil"),
                          ("Teknisk data, profil (Softline 70 AD)", "teh-data-profil-softline-70-ad-data"), ("P-märkning glas", "p-mark-glas"),
                          ("P-märkning profil / profilkatalog", "profil-katalog"), ("Ritningar profil (VEKA)", "veka")]),
-    ("02", "Montering", [("Monteringsbok", "monteringsbok"), ("Montering fönster", "montering-fonster"), ("Montering dörrar", "montering-dorr"),
+    ("wrench", "Montering", [("Monteringsbok", "monteringsbok"), ("Montering fönster", "montering-fonster"), ("Montering dörrar", "montering-dorr"),
                         ("Montering skjutdörrar", "montering-patio"), ("Montering rullgardiner", "en-installation-rollite")]),
-    ("03", "Justering", [("Justering dörrar", "justering-dorr"), ("Justering Designo", "justering-designo"), ("Justering skjutdörrar", "justering-skjutdorr")]),
-    ("04", "Rapporter & övrigt", [("SP-rapport fönster", "sp-raport"), ("Skötselråd", "skotsel"), ("Garantikort", "garantikort"),
+    ("sliders", "Justering", [("Justering dörrar", "justering-dorr"), ("Justering Designo", "justering-designo"), ("Justering skjutdörrar", "justering-skjutdorr")]),
+    ("file", "Rapporter & övrigt", [("SP-rapport fönster", "sp-raport"), ("Skötselråd", "skotsel"), ("Garantikort", "garantikort"),
                                  ("Lås och handtag – tillbehör & priser", "info"), ("Ritningar & priser, dörrar", "profil"), ("Ritningar kombinerade dörrar", "fonster")]),
 ]
-cards = "".join(f'<div class="service reveal"><h3><span>{n}</span>{t}</h3>{doclinks(rows)}</div>' for n, t, rows in groups)
+cards = "".join(f'<div class="service reveal"><h3>{icon(n)}{t}</h3>{doclinks(rows)}</div>' for n, t, rows in groups)
 body = f'''{page_hero("Dokument", "Certifikat, montering och skötsel", "Ladda ner certifikat, monteringsanvisningar, justeringsguider och garantikort.")}
 <section style="padding-top:0"><div class="wrap"><div class="docs">{cards}</div></div></section>
 {CTA}'''
@@ -488,11 +528,14 @@ body = f'''{page_hero("Frakt", "Information om frakt och leverans", "Hämta sjä
   <div class="split top">
     <div class="rounded reveal" style="aspect-ratio:4/3"><img src="{fr[0]}" alt="Fönsterfabrikens lastbil" loading="lazy"></div>
     <div class="services" style="grid-template-columns:1fr">
-      <div class="service reveal"><h3><span>01</span>Egen transport</h3>
+      <div class="service reveal"><h3>{icon("box")}Egen transport</h3>
         <p>Kommer du med egen transport ska du tänka på att ta med tillräckligt med spännband och kartong. Fönster och dörrar ska köras stående.</p>
         <p>I priset ingår lastning med truck. Om ert transportmedel inte är avsett för den typen av lastning, ta med hjälp eller beställ lastningshjälp i förväg. Lastning kostar 250 kr + moms per timme och person, minsta debitering 30 minuter.</p>
         <p>Specialtillverkade pallar kan beställas i förväg.</p></div>
-      <div class="service reveal"><h3><span>02</span>Leverans med vår lastbil</h3>
+      <div class="service reveal"><h3>{icon("sliders")}Priser i korthet</h3><ul class="service-list">
+        <li>Lastningshjälp<span>250 kr + moms / tim / person</span></li><li>Minsta debitering<span>30 min</span></li>
+        <li>Avlastning vid leverans<span>30 min ingår</span></li><li>Tid därutöver<span>250 kr + moms / påbörjad tim</span></li></ul></div>
+      <div class="service reveal"><h3>{icon("truck")}Leverans med vår lastbil</h3>
         <p>Vi har egen lastbil och erbjuder leverans av fönsterpartier till närliggande områden – begär offert för leverans.</p>
         <p>I priset ingår 30 minuter för avlastning på plats, som ordnas av kunden; föraren får inte hjälpa till på grund av ansvarsfördelning. Tid därutöver debiteras med 250 kr + moms per påbörjad timme. Har kunden beställt montering hjälper montörerna till att lasta av.</p>
         <p>Vid behov står kunden för kostnaden för kran, truck eller liknande. Är transportsträckan väldigt lång kan du begära en prisoffert på frakten.</p></div>
@@ -512,11 +555,11 @@ body = f'''{page_hero("Kontakt", "Välkommen till Fönsterfabriken i Väst", "Ri
   <div class="contact-grid" id="offert">
     <div class="contact-info reveal">
       <dl>
-        <div><dt>Telefon</dt><dd><a href="tel:{TEL1}">{TEL1_H}</a><br><a href="tel:{TEL2}">{TEL2_H}</a></dd></div>
-        <div><dt>E-post</dt><dd><a href="mailto:{MAIL}">{MAIL}</a><br><a href="mailto:alina@fvab.se">alina@fvab.se</a></dd></div>
-        <div><dt>Kontaktperson</dt><dd>Alina Andrews</dd></div>
-        <div><dt>Lager och utställning</dt><dd>Göteborgsvägen 90<br>463 33 Lilla Edet</dd></div>
-        <div><dt>Tillverkning</dt><dd>Skeppsbyggaregatan 7<br>463 71 Lödöse</dd></div>
+        <div class="ci">{icon("phone", "cico")}<div><dt>Telefon</dt><dd><a href="tel:{TEL1}">{TEL1_H}</a><br><a href="tel:{TEL2}">{TEL2_H}</a></dd></div></div>
+        <div class="ci">{icon("mail", "cico")}<div><dt>E-post</dt><dd><a href="mailto:{MAIL}">{MAIL}</a><br><a href="mailto:alina@fvab.se">alina@fvab.se</a></dd></div></div>
+        <div class="ci">{icon("user", "cico")}<div><dt>Kontaktperson</dt><dd>Alina Andrews</dd></div></div>
+        <div class="ci">{icon("pin", "cico")}<div><dt>Lager och utställning</dt><dd>Göteborgsvägen 90<br>463 33 Lilla Edet</dd></div></div>
+        <div class="ci">{icon("factory", "cico")}<div><dt>Tillverkning</dt><dd>Skeppsbyggaregatan 7<br>463 71 Lödöse</dd></div></div>
       </dl>
     </div>
     <form class="form reveal" id="forfragan">

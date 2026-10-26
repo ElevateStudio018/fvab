@@ -402,3 +402,66 @@ section{padding:clamp(72px,10vw,140px) 0}
 /* Photos framed like a sash: rounder top, thin inner frame */
 .photos a{border-radius:18px 18px 6px 6px}
 .photos a::before{content:"";position:absolute;inset:8px;border:1px solid rgba(255,255,255,.45);border-radius:12px 12px 3px 3px;z-index:1;pointer-events:none}
+
+/* ---------- Detail pass ---------- */
+/* Breadcrumbs */
+.crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:.5em;font-size:.82rem;color:var(--muted);margin-bottom:1.4rem}
+.crumbs a:hover{color:var(--accent)}
+.crumbs i{font-style:normal;opacity:.45}
+.crumbs span{color:var(--ink)}
+
+/* Text links with a growing line arrow */
+.textlink,.pcard .more{display:inline-flex;align-items:center;gap:.6em;font-weight:500;font-size:.92rem}
+.textlink i,.pcard .more i{position:relative;display:inline-block;width:22px;height:1.5px;background:currentColor;transition:width .3s cubic-bezier(.2,.7,.2,1)}
+.textlink i::after,.pcard .more i::after{content:"";position:absolute;right:0;top:50%;width:7px;height:7px;border-top:1.5px solid currentColor;border-right:1.5px solid currentColor;transform:translateY(-50%) rotate(45deg)}
+.textlink:hover i,.pcard:hover .more i{width:34px}
+.textlink:hover,.pcard:hover .more{color:var(--accent)}
+.pcard .more{margin-top:auto;padding-top:10px}
+
+/* Icons in headings */
+.sico{display:inline-grid;place-items:center;width:38px;height:38px;flex:none;border-radius:12px;background:linear-gradient(145deg,#fff,rgba(201,219,228,.6));border:1px solid rgba(63,98,117,.15);color:var(--accent);margin-right:2px}
+.sico svg{width:20px;height:20px}
+.service h3{align-items:center}
+.cico{display:inline-grid;place-items:center;width:34px;height:34px;flex:none;border-radius:50%;background:rgba(63,98,117,.1);color:var(--accent)}
+.cico svg{width:17px;height:17px}
+
+/* Spec box: label and value on one row */
+.spec dl{gap:0}
+.spec dl>div{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:11px 0;border-bottom:1px solid var(--line)}
+.spec dl>div:last-child{border-bottom:0}
+.spec dt{flex:none;font-size:.8rem;letter-spacing:0;text-transform:none}
+.spec dd{text-align:right;font-size:.92rem;min-width:0}
+
+/* Documents: file icon + size */
+.doclist a{justify-content:flex-start}
+.doclist a b{font-weight:400;flex:1;min-width:0}
+.doclist a span{letter-spacing:.02em;text-transform:none}
+.fico{display:inline-grid;place-items:center;width:30px;height:30px;flex:none;border-radius:8px;background:rgba(63,98,117,.08);color:var(--accent)}
+.fico svg{width:16px;height:16px}
+
+/* Drawing labels as small tags */
+.drawing b{display:inline-block;padding:.25em .6em;border-radius:6px;background:rgba(63,98,117,.09);letter-spacing:.08em;margin-bottom:6px}
+.drawing{transition:transform .25s,box-shadow .25s}
+.drawing:hover{transform:translateY(-3px);box-shadow:0 14px 30px -20px rgba(27,29,31,.4)}
+
+/* Contact rows with icons */
+.contact-info .ci{display:flex;gap:14px;align-items:flex-start}
+.contact-info .cico{background:rgba(255,255,255,.1);color:#9cc0d2}
+
+/* New CTA: light card with framed image */
+.cta2{padding-top:0}
+.cta2-card{display:grid;grid-template-columns:1fr 1.1fr;gap:clamp(24px,4vw,56px);align-items:center;background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:clamp(16px,2vw,24px) clamp(16px,2vw,24px) clamp(16px,2vw,24px) clamp(24px,4vw,56px)}
+.cta2-card>*{min-width:0}
+.cta2-text h2{max-width:16ch;margin-bottom:1rem}
+.cta2-text p{color:var(--muted);max-width:44ch;margin-bottom:1.8rem}
+.cta2-contact{list-style:none;display:grid;gap:10px;margin-top:2rem;padding-top:1.4rem;border-top:1px solid var(--line)}
+.cta2-contact li{display:flex;align-items:center;gap:12px;font-weight:500}
+.cta2-contact a:hover{color:var(--accent)}
+.cta2-img{position:relative;border-radius:22px 22px 10px 10px;overflow:hidden;aspect-ratio:4/3.4}
+.cta2-img img{width:100%;height:100%;object-fit:cover}
+.cta2-img::before{content:"";position:absolute;inset:12px;border:1px solid rgba(255,255,255,.55);border-radius:14px 14px 4px 4px;z-index:1;pointer-events:none}
+@media (max-width:860px){.cta2-card{grid-template-columns:1fr;padding:clamp(20px,5vw,32px)}.cta2-img{order:-1}}
+
+/* Footer: back to top */
+.totop{font-size:.82rem;color:var(--muted)}
+.totop:hover{color:var(--accent)}
