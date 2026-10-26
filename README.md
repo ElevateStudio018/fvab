@@ -1,7 +1,7 @@
 # Fönsterfabriken i Väst – ny webbplats
 
-Statisk, modern omarbetning av fvab.se, i samma formspråk som Essens Arkitektur-sajten (varm papperston, rundade kort, pill-meny, Poppins) men med en kallare glasblå accent.
-All text, alla bilder och alla PDF:er kommer från originalsajten; startsidans hero-bild kommer från företagets Google Maps-sida.
+Statisk, modern omarbetning av fvab.se med en egen "fönsterkarm"-identitet: skarpa hörn, tunna ramlinjer, sval glasgrön palett, Archivo + IBM Plex Sans/Mono.
+All text, alla bilder och alla PDF:er kommer från originalsajten; startsidans hero-bild kommer från företagets Google Maps-sida. Bilden i offertsektionen (`assets/img/cta/skjutdorr-4k.webp`) är uppskalad till 3840 px med image-upscaling.net.
 
 - 16 sidor: start, produkter (8 produktsidor), galleri (514 referensbilder med filter + lightbox), hustillverkning (Isolla Bygg), om PVC, dokument (23 PDF:er), frakt, kontakt
 - Sidorna genereras från `build.py` – ändra text där och kör `python3 build.py`

@@ -40,11 +40,13 @@ def page(path, title, desc, body, active="", og=HERO):
 <link rel="icon" href="favicon.ico">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
+<script>document.documentElement.classList.add("js")</script>
 </head>
 <body>
 <header class="site-header">
+  <div class="topbar"><div class="wrap"><span><a href="tel:{TEL1}">{TEL1_H}</a><a href="mailto:{MAIL}">{MAIL}</a></span><span class="hide-sm">Utställning: Göteborgsvägen 90, Lilla Edet · Tillverkning: Lödöse</span></div></div>
   <nav class="nav" aria-label="Huvudmeny">
     {logo}
     <ul>{links}</ul>
@@ -102,9 +104,9 @@ def page_hero(eyebrow, title, lead):
 
 
 CTA = f'''<section class="cta reveal">
-  <img src="{I}galleri/skjutdorrar/skjutdorrar-115.webp" alt="" loading="lazy">
+  <img src="{I}cta/skjutdorr-4k.webp" alt="" loading="lazy">
   <div class="wrap">
-    <span class="eyebrow" style="color:#cfe1ea">Fönster &amp; dörrar efter mått</span>
+    <span class="eyebrow">Fönster &amp; dörrar efter mått</span>
     <h2>Berätta vad du planerar – vi tar fram en offert.</h2>
     <p>Allt tillverkas på beställning i vår fabrik i Lödöse. Välkommen att besöka utställningen i Lilla Edet, eller skicka en förfrågan direkt.</p>
     <div class="btns"><a class="btn btn-light" href="kontakt.html#offert">Begär offert {ARROW}</a><a class="btn btn-ghost" href="tel:{TEL1}">Ring {TEL1_H}</a></div>
@@ -160,7 +162,7 @@ def product_page(slug, lead, intro_html, stats, specs, extra, eyebrow="Produkter
     body = f'''<section class="page-hero"><div class="wrap split">
   <div><span class="eyebrow">{eyebrow}</span><h1>{p["title"]}</h1><p class="lead">{lead}</p>
   <div class="btns" style="display:flex;flex-wrap:wrap;gap:10px;margin-top:2rem"><a class="btn btn-primary" href="kontakt.html#offert">Begär offert {ARROW}</a>{f'<a class="btn btn-ghost" href="galleri.html?kategori={p["gal"]}">Se referenser</a>' if p["gal"] else ""}</div></div>
-  <div class="rounded reveal" style="aspect-ratio:4/3;max-width:640px;justify-self:end;width:100%"><img src="{p["cover"]}" alt="{esc(p["title"])}" fetchpriority="high"></div>
+  <div class="rounded framed reveal" style="aspect-ratio:4/3;max-width:640px;justify-self:end;width:100%"><img src="{p["cover"]}" alt="{esc(p["title"])}" fetchpriority="high"></div>
 </div></section>
 <section style="padding-top:0"><div class="wrap">
   {f'<div class="stats reveal" style="margin-bottom:64px">{stat_html}</div>' if stats else ""}
@@ -349,21 +351,22 @@ page("produkter.html", "Produkter – Fönsterfabriken i Väst", "PVC-fönster, 
 FEAT = PRODUCTS[:4]
 home = f'''
 <section class="hero">
-  <div class="hero-inner">
-    <img src="{HERO}" alt="Villa med PVC-fönster, skjutdörrar och burspråk från Fönsterfabriken i Väst" fetchpriority="high">
-    <a class="hero-tag" href="kontakt.html">Utställning i Lilla Edet →</a>
-    <div class="hero-content">
-      <div>
-        <span class="eyebrow" style="color:#cfe1ea">Svensktillverkade PVC-fönster &amp; dörrar</span>
-        <h1>Fönster som släpper in ljuset – och håller ute vädret</h1>
-      </div>
-      <div>
-        <p>PVC är ett perfekt material för konstruktion – därför väljer allt fler PVC-fönster och dörrar i sina fastigheter. Energisnåla, underhållsfria och kostnadseffektiva.</p>
-        <div class="btns"><a class="btn btn-light" href="kontakt.html#offert">Begär offert {ARROW}</a><a class="btn btn-ghost" href="produkter.html">Se produkter</a></div>
-      </div>
+  <img src="{HERO}" alt="Villa med PVC-fönster, skjutdörrar och burspråk från Fönsterfabriken i Väst" fetchpriority="high">
+  <div class="wrap">
+    <div class="sash">
+      <span class="eyebrow">Svensktillverkade PVC-fönster &amp; dörrar</span>
+      <h1>Fönster som släpper in ljuset och håller ute vädret</h1>
+      <p>PVC är ett perfekt material för konstruktion – därför väljer allt fler PVC-fönster och dörrar i sina fastigheter. Energisnåla, underhållsfria och kostnadseffektiva.</p>
+      <div class="btns"><a class="btn btn-primary" href="kontakt.html#offert">Begär offert {ARROW}</a><a class="btn btn-ghost" href="produkter.html">Se produkter</a></div>
     </div>
   </div>
 </section>
+<section class="specbar"><div class="wrap">
+  <div><b>0,7 W/m²K</b><span>U-värde glas, 3-glas</span></div>
+  <div><b>5 kammare</b><span>Profil förstärkt med metall</span></div>
+  <div><b>8 m</b><span>Max bredd skjutdörr</span></div>
+  <div><b>Lödöse</b><span>Egen tillverkning</span></div>
+</div></section>
 
 <section><div class="wrap">
   <div class="split top">
@@ -402,7 +405,7 @@ home = f'''
 
 <section style="padding-top:0"><div class="wrap">
   <div class="split">
-    <div class="rounded reveal" style="aspect-ratio:4/3"><img src="{I}hus/lena.webp" alt="Tillbyggnad i Kållekär" loading="lazy"></div>
+    <div class="rounded framed reveal" style="aspect-ratio:4/3"><img src="{I}hus/lena.webp" alt="Tillbyggnad i Kållekär" loading="lazy"></div>
     <div class="reveal"><span class="eyebrow">Isolla Bygg</span><h2>Hustillverkning med SIP-element</h2>
       <p class="lead" style="margin-top:1.2rem">Utöver fönster och dörrar bygger vi tillbyggnader, attefallshus och hela hus med egentillverkade SIP-moduler och underhållsfria fasader.</p>
       <a class="btn btn-primary" style="margin-top:2rem" href="hustillverkning.html">Se referenser {ARROW}</a></div>
@@ -459,8 +462,7 @@ body = f'''{page_hero("Om PVC", "Fördelar med PVC-fönster", "PVC är ett perfe
 </div></div></section>
 <section style="padding-top:0"><div class="wrap">
   <div class="section-head reveal"><div><span class="eyebrow">Leverantörer</span><h2>Tysk och europeisk kvalitet</h2></div></div>
-  <div class="logos reveal">{"".join(f'<div><img src="{I}logos/{f}.webp" alt="{esc(t)}" loading="lazy"></div>' for f, t in logos)}</div>
-  <div class="logos" style="margin-top:8px">{"".join(f'<span>{esc(t)}</span>' for f, t in logos)}</div>
+  <div class="logos reveal">{"".join(f'<figure><img src="{I}logos/{f}.webp" alt="{esc(t)}" loading="lazy"><figcaption>{esc(t)}</figcaption></figure>' for f, t in logos)}</div>
 </div></section>
 {CTA}'''
 page("info.html", "Fördelar med PVC-fönster – Fönsterfabriken i Väst", "Fördelar med PVC-fönster, glasalternativ, beslag och leverantörer.", body, "info.html")
@@ -488,7 +490,7 @@ fr = [I + "frakt/" + f + ".webp" for f in ["lastbil", "dsc01452", "dsc05354", "d
 body = f'''{page_hero("Frakt", "Information om frakt och leverans", "Hämta själv i Lilla Edet eller låt oss leverera med egen lastbil till närliggande områden.")}
 <section style="padding-top:0"><div class="wrap">
   <div class="split top">
-    <div class="rounded reveal" style="aspect-ratio:4/3"><img src="{fr[0]}" alt="Fönsterfabrikens lastbil" loading="lazy"></div>
+    <div class="rounded framed reveal" style="aspect-ratio:4/3"><img src="{fr[0]}" alt="Fönsterfabrikens lastbil" loading="lazy"></div>
     <div class="services" style="grid-template-columns:1fr">
       <div class="service reveal"><h3><span>01</span>Egen transport</h3>
         <p>Kommer du med egen transport ska du tänka på att ta med tillräckligt med spännband och kartong. Fönster och dörrar ska köras stående.</p>
